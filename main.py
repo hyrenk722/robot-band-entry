@@ -14,15 +14,20 @@ MIN_LENGTH = 1
 MAX_LENGTH = 200
 
 
-def check_gate(text):
-    """Return True when the entry satisfies the competition gate."""
+def validate(text):
+    """Check every gate rule for the entry text; True only when all pass."""
     if not isinstance(text, str):
         return False
-    if not (MIN_LENGTH <= len(text) <= MAX_LENGTH):
+    if len(text) < MIN_LENGTH or len(text) > MAX_LENGTH:
         return False
-    if not text.strip():
+    if text.strip() == "":
         return False
     return True
+
+
+def check_gate(text):
+    """Gate entry point: delegates to validate()."""
+    return validate(text)
 
 
 def main():
